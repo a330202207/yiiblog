@@ -13,4 +13,8 @@ return  [
     'If you forgot your password you can' => '如果您忘记了密码，您可以',
     'reset it.' => '重新设置密码。',
     'Please fill out the following fields to signup:' => '请填写以下字段注册：',
+
+    'This username has already been taken.' => '用户名已经存在！',
+    'This email address has already been taken.' => '邮箱已经存在！',
+    'Two times the password is not consistent.' => '两次密码不一致！',
 ];

@@ -34,27 +34,33 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => Yii::t('yii', 'Home'), 'url' => ['/site/index']],
-        ['label' => Yii::t('common', 'About'), 'url' => ['/site/about']],
-        ['label' => Yii::t('common', 'Contact'), 'url' => ['/site/contact']],
+    $leftMenu = [
+        ['label' => '首页', 'url' => ['/site/index']],
+        ['label' => '文章', 'url' => ['/post/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => Yii::t('common', 'Signup'), 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => Yii::t('common', 'Login'), 'url' => ['/site/login']];
+        $rightMenu[] = ['label' => '注册', 'url' => ['/site/signup']];
+        $rightMenu[] = ['label' => '登录', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
+        $rightMenu[] = [
+            'label' =>'<img src="/statics/images/avatar/small.png" alt="' .Yii::$app->user->identity->username.'">',
+            'linkOptions' => ['class' => 'btn btn-link avatar'],
+            'items' => [
+                ['label' => '<i class="fa fa-sign-out"></i>退出', 'url' => ['/site/logout'],'linkOptions' => ['data-method' => 'post']],
+                ['label' => '<i class="fa fa-user"></i>个人中心', 'url' => ['/site/logout'],'linkOptions' => ['data-method' => 'post']],
+            ],
+        ];
     }
+
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-left'],
+        'items' => $leftMenu,
+    ]);
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
+        'encodeLabels' => false,
+        'items' => $rightMenu,
     ]);
     NavBar::end();
     ?>

@@ -7,30 +7,30 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = Yii::t('common', 'Login');
+$this->title = '登录';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p><?=Yii::t('common', 'Please fill out the following fields to login:')?></p>
+    <p>请填写以下字段进行登录：</p>
 
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-                <?= $form->field($model, 'username', ['labelOptions' => ['label' => Yii::t('common', 'username')]])->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
-                <?= $form->field($model, 'password', ['labelOptions' => ['label' => Yii::t('common', 'password')]])->passwordInput() ?>
+                <?= $form->field($model, 'password')->passwordInput() ?>
 
-                <?= $form->field($model, 'rememberMe', ['labelOptions' => ['label' => Yii::t('common', 'rememberMe')]])->checkbox() ?>
+                <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
                 <div style="color:#999;margin:1em 0">
-                    <?=Yii::t('common', 'If you forgot your password you can')?><?= Html::a(Yii::t('common', 'reset it.'), ['site/request-password-reset']) ?>.
+                    如果您忘记了密码，您可以<?= Html::a('重新设置密码', ['site/request-password-reset']) ?>.
                 </div>
 
                 <div class="form-group">
-                    <?= Html::submitButton(Yii::t('common', 'Login'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    <?= Html::submitButton('登录', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>
