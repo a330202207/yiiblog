@@ -5,7 +5,7 @@ namespace backend\assets;
 use yii\web\AssetBundle;
 
 /**
- * Main backend application asset bundle.
+ * 后台登录页面资源
  */
 class LoginAsset extends AssetBundle
 {
@@ -15,10 +15,7 @@ class LoginAsset extends AssetBundle
         'static/css/style.css',
     ];
     public $js = [
-        'static/css/jquery.min.js',
-    ];
-    public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'static/js/jquery.min.js',
+        'static/js/layer/layer.js',
     ];
 }

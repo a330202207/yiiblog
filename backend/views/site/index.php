@@ -1,53 +1,69 @@
 <?php
+use backend\assets\LoginAsset;
+use yii\helpers\Html;
 
-/* @var $this yii\web\View */
+LoginAsset::register($this);
 
-$this->title = 'My Yii Application';
 ?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+<?php $this->beginPage() ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="<?= Yii::$app->language ?>">
+<head>
+    <meta charset="<?= Yii::$app->charset ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>后台登录</title>
+    <?= Html::csrfMetaTags() ?>
+    <?php $this->head() ?>
+</head>
+<body>
+<?php $this->beginBody() ?>
+    <div class="login">
+        <h2></h2>
+        <div class="login-top">
+            <h1>后台系统登录</h1>
+            <?= Html::input('text', 'username', '', ['id' => 'username', 'placeholder' => '用户名']) ?>
+            <?= Html::input('password', 'password', '', ['id' => 'password', 'placeholder' => '密码']) ?>
+            <div class="forgot">
+                <!--	    	<a href="#">forgot Password</a>-->
             </div>
         </div>
-
+        <div class="login-bottom">
+            <input type="hidden" name="YII_CSRF_TOKEN" id="csrf" value="<?=Yii::$app->request->getCsrfToken() ?>">
+            <?= Html::input('submit', '', '登录', ['id' => 'login']) ?>
+        </div>
     </div>
-</div>
+<?php $this->endBody() ?>
+</body>
+</html>
+<?php $this->endPage() ?>
+<script type="text/javascript">
+    $("#login").click(function () {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var csrfToken = $("#csrf").val();
+
+        /*        if (!username) {
+         layer.msg('用户名不能为空！', {icon: 2});
+         } else if(!password) {
+         layer.msg('密码不能为空！', {icon: 2});
+         } else {
+
+         }*/
+
+        var data = {'LoginForm[username]': username, 'LoginForm[password]': password, '_csrf-backend': csrfToken};
+        $.ajax({
+            type: "post",
+            url: 'site/login',
+            data: data,
+            success: function (res) {
+                console.log(res);
+                /*                if (res == 1) {
+                 layer.msg('登录成功', {icon: 1});
+                 } else {
+                 layer.msg('用户名或密码错误', {icon: 2});
+                 }*/
+            }
+        });
+    });
+</script>
