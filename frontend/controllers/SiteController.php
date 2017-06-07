@@ -88,9 +88,14 @@ class SiteController extends BaseController
         }
 
         $model = new LoginForm();
+//        var_dump($model->login());die;
+/*        var_dump(Yii::$app->request->post());die;
+        var_dump($model->load(Yii::$app->request->post()));die;
+        var_dump($model->login());*/
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
+//            var_dump($model);die;
             return $this->render('login', [
                 'model' => $model,
             ]);

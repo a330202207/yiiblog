@@ -12,10 +12,10 @@ class LoginAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'static/css/style.css',
+        'static/css/login.css',
     ];
     public $js = [
-        'static/js/jquery.min.js',
-        'static/js/layer/layer.js',
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }
