@@ -15,7 +15,7 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
+/*    public function behaviors()
     {
         return [
             'access' => [
@@ -39,7 +39,7 @@ class SiteController extends Controller
                 ],
             ],
         ];
-    }
+    }*/
 
     /**
      * @inheritdoc
@@ -70,8 +70,11 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $this->layout = 'login.php';
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
         $model = new LoginForm();
-//        var_dump(Yii::$app->request->post());die;
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {

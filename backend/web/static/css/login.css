@@ -105,7 +105,7 @@ body{
 .forgot  a:hover{
   color: #818181;
 }
-.login-bottom input[type="submit"] {
+.login-bottom button[type="submit"] {
   background: #FFF;
   color: #F45B4B;
   font-size: 17px;
@@ -122,7 +122,7 @@ body{
   outline: none;
   border: none;
 }
-.forgot input[type="submit"]:hover {
+.forgot button[type="submit"]:hover {
 	background:#818181;
 	transition: 0.5s all;
   -webkit-transition: 0.5s all;
