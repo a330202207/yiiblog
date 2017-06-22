@@ -5,17 +5,17 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use backend\models\LoginForm;
+use common\models\LoginForm;
 
 /**
  * Site controller
  */
-class SiteController extends BeseController
+class SiteController extends Controller
 {
     /**
      * @inheritdoc
      */
-/*    public function behaviors()
+    public function behaviors()
     {
         return [
             'access' => [
@@ -39,7 +39,7 @@ class SiteController extends BeseController
                 ],
             ],
         ];
-    }*/
+    }
 
     /**
      * @inheritdoc
@@ -70,10 +70,10 @@ class SiteController extends BeseController
      */
     public function actionLogin()
     {
-        $this->layout = 'login.php';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
+
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
