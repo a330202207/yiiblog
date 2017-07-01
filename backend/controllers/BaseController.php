@@ -6,6 +6,20 @@ use yii\web\Controller;
 
 class BaseController extends Controller
 {
+    /**
+     * @var LayoutModel
+     */
+    private  $_model;
+
+    /**
+     * @var array layout 层数据
+     */
+    public $layoutData = array();
+
+    public function init()
+    {
+        parent::init();
+    }
 
     /**
      * @inheritdoc
@@ -19,7 +33,7 @@ class BaseController extends Controller
         ];
     }
 
-    public function beforeAction($action)
+/*    public function beforeAction($action)
     {
         $loginStatus = $this->checkLoginStatus();
         if (!$loginStatus && !in_array($action->uniqueId, $this->allowAllAction)) {
@@ -63,6 +77,6 @@ class BaseController extends Controller
             return true;
         }
         return false;
-    }
+    }*/
 
 }

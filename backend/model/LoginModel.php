@@ -1,49 +1,46 @@
 <?php
-namespace backend\models;
+namespace backend\model;
 
 use Yii;
-use yii\base\Model;
+use backend\models\Admin;
 
 /**
  * Login form
  */
-class LoginForm extends Model
+class LoginModel extends BaseModel
 {
-    public $username;
-    public $password;
-    public $rememberMe = true;
+    public $username;           //用户名
+    public $password;           //密码
+    public $rememberMe = true;  //记住我
 
-    private $_user;
+    private $_user;             //用户名
 
 
     /**
-     * @inheritdoc
+     * 规则
      */
     public function rules()
     {
         return [
-            // username and password are both required
-            [['username', 'password'], 'required'],
-            // rememberMe must be a boolean value
+            ['username', 'required', 'message' => '用户名不能为空！'],
+            ['password', 'required', 'message' => '密码不能为空！'],
             ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
             ['password', 'validatePassword'],
         ];
     }
 
     /**
-     * Validates the password.
-     * This method serves as the inline validation for password.
+     * 密码验证
      *
-     * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
+     * @param string $password 密码
+     * @param array $params 规则键值对
      */
-    public function validatePassword($attribute, $params)
+    public function validatePassword($password, $params)
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($password, '用户名或密码错误！');
             }
         }
     }
@@ -63,16 +60,15 @@ class LoginForm extends Model
     }
 
     /**
-     * Finds user by [[username]]
+     * 获取用户名
      *
      * @return User|null
      */
     protected function getUser()
     {
         if ($this->_user === null) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = Admin::findByUsername($this->username);
         }
-
         return $this->_user;
     }
 
