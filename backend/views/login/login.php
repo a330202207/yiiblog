@@ -7,7 +7,7 @@ use yii\bootstrap\ActiveForm;
     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
     <div class="login-top">
         <h1>后台系统登录</h1>
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'placeholder' => '用户名'])->label(false) ?>
+        <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'autocomplete' => 'off', 'placeholder' => '用户名'])->label(false) ?>
         <?= $form->field($model, 'password')->passwordInput(['placeholder' => '密码'])->label(false) ?>
         <?= $form->field($model, 'rememberMe')->checkbox()->label('记住我') ?>
 <!--        <div class="forgot">

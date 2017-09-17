@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use backend\components\NavWidget;
 use backend\components\HeaderWidget;
+use backend\components\FooterWidget;
 
 AppAsset::register($this);
 ?>
@@ -19,23 +20,25 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
+<div class="layui-layout layui-layout-admin">
 <?php $this->beginBody() ?>
 <!--头部挂件开始-->
 <?= HeaderWidget::widget(); ?>
 <!--头部挂件结束-->
 
-<section id="main">
-    <!--菜单挂件开始-->
-    <?= NavWidget::widget(); ?>
-    <!--菜单挂件结束-->
+<!--菜单挂件开始-->
+<?= NavWidget::widget(); ?>
+<!--菜单挂件结束-->
 
-    <!--中间的内容开始-->
-    <section id="content">
+<!--中间的内容开始-->
+<div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">内容主体区域</div>
+</div>
+<!--中间的内容结束-->
+<?= FooterWidget::widget(); ?>
 
-    </section>
-    <!--中间的内容结束-->
-</section>
-
+</div>
 <?php $this->endBody() ?>
 </body>
 </html>

@@ -5,9 +5,9 @@
 
 namespace backend\components;
 
-
-use yii\base\Widget;
 use Yii;
+use yii\base\Widget;
+
 
 class NavWidget extends Widget
 {

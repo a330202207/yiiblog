@@ -4,10 +4,11 @@ namespace backend\controllers;
 
 use Yii;
 use yii\helpers\Url;
+use yii\web\Controller;
 use backend\model\LoginModel;
 
 
-class LoginController extends BaseController
+class LoginController extends Controller
 {
 
     /**
@@ -21,9 +22,6 @@ class LoginController extends BaseController
         $model = new LoginModel();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             $request = Yii::$app->request;
-            $cookies = $request->cookies;
-            var_dump(Yii::$app->user->renewIdentityCookie(),Yii::$app->user->getId());die;
-//            var_dump($cookies['_csrf-backend']);die;
             return $this->redirect(Url::toRoute('/site/index'));
         } else {
             return $this->render('login', [
